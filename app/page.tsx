@@ -257,13 +257,15 @@ export default function EarPiercingInvitation() {
   const mapsUrl =
     "https://maps.app.goo.gl/ZjvbQTxL5djhuXxR9";
 
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
   return (
     <div className="relative h-screen h-[100dvh] w-full flex flex-col items-center justify-between text-amber-50 selection:bg-amber-500 selection:text-black overflow-hidden font-sans p-2 sm:p-4">
 
       {/* Automatic Background Nadaswaram Audio Player */}
       <audio
         ref={audioRef}
-        src="/Mangala-Vadhyam-Nadaswaram.mp3"
+        src={`${basePath}/Mangala-Vadhyam-Nadaswaram.mp3`}
         autoPlay
         loop
         playsInline
@@ -273,7 +275,7 @@ export default function EarPiercingInvitation() {
       <div className="fixed inset-0 w-full h-full -z-20 overflow-hidden bg-black">
         <video
           ref={video2Ref}
-          src="/secene_2.mp4"
+          src={`${basePath}/secene_2.mp4`}
           autoPlay
           loop
           muted
@@ -386,7 +388,7 @@ export default function EarPiercingInvitation() {
                     }`}
                 >
                   <Image
-                    src="/p1.png"
+                    src={`${basePath}/p1.png`}
                     alt="Baby Poornika (Initial)"
                     fill
                     sizes="208px"
@@ -401,7 +403,7 @@ export default function EarPiercingInvitation() {
                     }`}
                 >
                   <Image
-                    src="/p2.png"
+                    src={`${basePath}/p2.png`}
                     alt="Baby Poornika with Ear Rings"
                     fill
                     sizes="208px"
