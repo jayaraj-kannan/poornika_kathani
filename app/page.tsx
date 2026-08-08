@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 
 
-// Web Audio API Temple Chime Synthesizer
+// Web Audio API Temple Chime Synthesizer (Lite Soft Volume)
 function playAuspiciousChime() {
   if (typeof window === "undefined") return;
   try {
@@ -38,7 +38,7 @@ function playAuspiciousChime() {
       osc.frequency.setValueAtTime(freq, ctx.currentTime + index * 0.1);
 
       gain.gain.setValueAtTime(0, ctx.currentTime + index * 0.1);
-      gain.gain.linearRampToValueAtTime(0.25, ctx.currentTime + index * 0.1 + 0.03);
+      gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + index * 0.1 + 0.03); // Soft lite volume
       gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + index * 0.1 + 2.5);
 
       osc.connect(gain);
@@ -60,6 +60,11 @@ interface Blessing {
 }
 
 export default function EarPiercingInvitation() {
+  // Preloader State
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+
   // State
   const [hasWished, setHasWished] = useState(false);
   const [wishCount, setWishCount] = useState(108);
@@ -95,35 +100,81 @@ export default function EarPiercingInvitation() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
-  // Background Nadaswaram Music Autoplay Effect
+  // Bulletproof Asset Preloading & Progress Animation Logic
   useEffect(() => {
-    const playAudio = () => {
-      if (audioRef.current) {
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+    // Preload key images in background without blocking
+    [`${basePath}/p1.png`, `${basePath}/p2.png`].forEach((src) => {
+      const img = new window.Image();
+      img.src = src;
+    });
+
+    // Smooth Progress Increment (0% to 100% over 1.8s)
+    let currentProgress = 0;
+    const interval = setInterval(() => {
+      currentProgress += Math.floor(Math.random() * 15) + 10;
+      if (currentProgress >= 100) {
+        currentProgress = 100;
+        setLoadingProgress(100);
+        clearInterval(interval);
+        setTimeout(() => {
+          setIsFadingOut(true);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 500);
+        }, 200);
+      } else {
+        setLoadingProgress(currentProgress);
+      }
+    }, 120);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Background Nadaswaram Music & Mobile Video Autoplay Effect
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.2; // Lite volume (20%)
+    }
+
+    const playVideosAndAudio = () => {
+      // Force play videos for mobile browsers
+      const videoElements = document.querySelectorAll("video");
+      videoElements.forEach((vid) => {
+        vid.muted = true;
+        vid.setAttribute("muted", "");
+        vid.setAttribute("playsinline", "");
+        vid.play().catch(() => {});
+      });
+
+      if (audioRef.current && audioRef.current.paused) {
+        audioRef.current.volume = 0.2; // Lite volume
         audioRef.current.play().then(() => {
           setIsMusicPlaying(true);
         }).catch((err) => {
-          console.log("Autoplay blocked by browser policy, waiting for user touch:", err);
+          console.log("Autoplay waiting for user touch:", err);
         });
       }
     };
 
-    playAudio();
+    playVideosAndAudio();
 
-    // Auto-resume audio on first user touch/click anywhere on page
-    const handleFirstTouch = () => {
-      if (audioRef.current && audioRef.current.paused) {
-        audioRef.current.play().then(() => {
-          setIsMusicPlaying(true);
-        }).catch(() => { });
-      }
+    // Auto-resume video & audio on first user touch/click/scroll anywhere on page (essential for iOS/Android battery saver)
+    const handleUserInteraction = () => {
+      playVideosAndAudio();
     };
 
-    window.addEventListener("click", handleFirstTouch, { once: true });
-    window.addEventListener("touchstart", handleFirstTouch, { once: true });
+    window.addEventListener("touchstart", handleUserInteraction, { passive: true });
+    window.addEventListener("touchend", handleUserInteraction, { passive: true });
+    window.addEventListener("click", handleUserInteraction, { passive: true });
+    window.addEventListener("scroll", handleUserInteraction, { passive: true });
 
     return () => {
-      window.removeEventListener("click", handleFirstTouch);
-      window.removeEventListener("touchstart", handleFirstTouch);
+      window.removeEventListener("touchstart", handleUserInteraction);
+      window.removeEventListener("touchend", handleUserInteraction);
+      window.removeEventListener("click", handleUserInteraction);
+      window.removeEventListener("scroll", handleUserInteraction);
     };
   }, []);
 
@@ -133,6 +184,7 @@ export default function EarPiercingInvitation() {
         audioRef.current.pause();
         setIsMusicPlaying(false);
       } else {
+        audioRef.current.volume = 0.2; // Lite volume
         audioRef.current.play().then(() => {
           setIsMusicPlaying(true);
         });
@@ -261,6 +313,45 @@ export default function EarPiercingInvitation() {
 
   return (
     <div className="relative min-h-screen h-[100dvh] w-full flex items-center justify-center bg-black overflow-hidden text-amber-50 selection:bg-amber-500 selection:text-black font-sans">
+
+      {/* PRELOADER SCREEN */}
+      {isLoading && (
+        <div
+          className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0d0703] text-amber-100 transition-opacity duration-700 ${
+            isFadingOut ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+        >
+          <div className="flex flex-col items-center gap-4 p-6 max-w-sm text-center">
+            {/* Diya Glow Icon */}
+            <div className="relative flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-b from-amber-500/20 to-yellow-600/10 border border-amber-400/40 shadow-[0_0_40px_rgba(245,158,11,0.4)] animate-pulse">
+              <span className="text-4xl">🪔</span>
+            </div>
+
+            <div className="space-y-1">
+              <div className="text-xs font-bold text-amber-300 tracking-widest uppercase">
+                ஸ்ரீ பெரியாண்டவர் துணை
+              </div>
+              <h2 className="text-lg font-black gold-text-gradient">
+                ஜ வி பூர்ணிகா காதணி விழா
+              </h2>
+              <p className="text-[11px] text-amber-200/70 font-medium">
+                அழைப்பிதழ் தயார் செய்யப்படுகிறது...
+              </p>
+            </div>
+
+            {/* Progress Bar Container */}
+            <div className="w-48 h-2 bg-amber-950/80 rounded-full border border-amber-500/30 overflow-hidden shadow-inner mt-2">
+              <div
+                className="h-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-300 transition-all duration-300 ease-out rounded-full shadow-[0_0_10px_rgba(250,204,21,0.8)]"
+                style={{ width: `${loadingProgress}%` }}
+              />
+            </div>
+            <div className="text-[10px] text-amber-400 font-bold tracking-wider">
+              {loadingProgress}%
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Automatic Background Nadaswaram Audio Player */}
       <audio
