@@ -260,7 +260,7 @@ export default function EarPiercingInvitation() {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   return (
-    <div className="relative h-screen h-[100dvh] w-full flex flex-col items-center justify-between text-amber-50 selection:bg-amber-500 selection:text-black overflow-hidden font-sans p-2 sm:p-4">
+    <div className="relative min-h-screen h-[100dvh] w-full flex items-center justify-center bg-black overflow-hidden text-amber-50 selection:bg-amber-500 selection:text-black font-sans">
 
       {/* Automatic Background Nadaswaram Audio Player */}
       <audio
@@ -271,19 +271,42 @@ export default function EarPiercingInvitation() {
         playsInline
       />
 
-      {/* Single Background Video (secene_2.mp4 - 100% Clear Visibility) */}
-      <div className="fixed inset-0 w-full h-full -z-20 overflow-hidden bg-black">
+      {/* Ambient Blurred Background Video for Large Screen Desktop View */}
+      <div className="fixed inset-0 w-full h-full z-0 overflow-hidden hidden sm:block pointer-events-none">
         <video
-          ref={video2Ref}
-          src={`${basePath}/secene_2.mp4`}
+          ref={(el) => { if (el) el.muted = true; }}
+          src={`${basePath}/secene_1.mp4`}
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-100 scale-100"
+          className="w-full h-full object-cover opacity-40 blur-2xl scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/75 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
+
+      {/* VERTICAL VIEW CONTAINER (Centered 9:16 Mobile Aspect Frame on Desktop) */}
+      <div className="relative z-10 w-full max-w-[440px] h-full sm:h-auto sm:max-h-[96vh] sm:aspect-[9/16] flex flex-col justify-between items-center p-2.5 sm:p-4 overflow-hidden sm:rounded-[2.5rem] sm:border-2 sm:border-amber-400/50 sm:shadow-[0_0_70px_rgba(0,0,0,0.95),0_0_35px_rgba(245,158,11,0.35)] bg-black">
+
+        {/* Main Background Video Inside Vertical Container */}
+        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+          <video
+            ref={(el) => {
+              (video2Ref as any).current = el;
+              if (el) {
+                el.muted = true;
+                el.play().catch(() => {});
+              }
+            }}
+            src={`${basePath}/secene_1.mp4`}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-100 scale-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/75 pointer-events-none z-0" />
+        </div>
 
       {/* Floating Petals Effect on Wish */}
       {hasWished && (
@@ -513,7 +536,7 @@ export default function EarPiercingInvitation() {
         ✨ ஜெயராஜ் &amp; விஷாலி குடும்பத்தினரின் காாதணி விழா அழைப்பு ✨
       </footer>
 
-
+      </div>
     </div>
   );
 }
