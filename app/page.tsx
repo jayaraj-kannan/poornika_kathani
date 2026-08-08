@@ -255,8 +255,7 @@ export default function EarPiercingInvitation() {
   )}`;
 
   const mapsUrl =
-    "https://www.google.com/maps/search/?api=1&query=" +
-    encodeURIComponent("Sri Periyandavar Periya Nayagi Thirukovil, Keezhkumaramangalam, Cuddalore");
+    "https://maps.app.goo.gl/ZjvbQTxL5djhuXxR9";
 
   return (
     <div className="relative h-screen h-[100dvh] w-full flex flex-col items-center justify-between text-amber-50 selection:bg-amber-500 selection:text-black overflow-hidden font-sans p-2 sm:p-4">
@@ -348,14 +347,14 @@ export default function EarPiercingInvitation() {
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-custom-1 tracking-wide py-0.5 drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
-            காாதணி விழா அழைப்பிதழ்
+            காதணி விழா அழைப்பிதழ்
           </h1>
         </div>
 
         {/* Parents & Daughter Tag */}
         <div className="space-y-0.5 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
           <p className="text-amber-100 text-xs sm:text-sm font-bold">
-            <span>திரு க ஜெயராஜ்</span> &amp; <span>திருமதி விஷாலி</span>
+            <span>திரு ஜெயராஜ்</span> &amp; <span>திருமதி விஷாலி</span>
           </p>
           <p className="text-amber-200/90 text-[11px] font-medium">அவர்களின் அன்பு மகள்</p>
         </div>
@@ -450,21 +449,10 @@ export default function EarPiercingInvitation() {
                 <Calendar className="w-3 h-3 text-amber-400" />
                 <span>தேதி &amp; நேரம்</span>
               </div>
-              <a
-                href={googleCalendarUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[9px] text-amber-200 bg-amber-500/30 px-1.5 py-0.2 rounded border border-amber-400/40 font-semibold"
-              >
-                + கேலண்டர்
-              </a>
             </div>
             <div className="mt-1">
               <div className="text-xs sm:text-sm font-black text-amber-100">16 ஆகஸ்ட் 2026</div>
               <div className="text-[10px] text-amber-300/90 font-medium">காலை 10:30 - 12:00 PM</div>
-              <div className="text-[9px] text-amber-200/80 flex items-center gap-0.5 mt-0.5">
-                <Utensils className="w-2.5 h-2.5 text-amber-400" /> விருந்து: 12 PM முதல்
-              </div>
             </div>
           </div>
 
