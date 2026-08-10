@@ -614,7 +614,11 @@ export default function EarPiercingInvitation() {
               {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
             </button>
           </div>
-
+          <div className="inline-flex items-center gap-1.5 bg-black/60 border border-amber-400/50 backdrop-blur-md rounded-full px-3 py-0.5 text-[10px] sm:text-xs font-bold text-amber-200 shadow-md">
+            <span>🪔</span>
+            <span className="tracking-wider">ஸ்ரீ பெரியாண்டவர் துணை</span>
+            <span>🪔</span>
+          </div>
           <div className="flex items-center gap-1.5">
 
 
@@ -641,11 +645,7 @@ export default function EarPiercingInvitation() {
 
           {/* Divine Invocation & Event Title */}
           <div className="flex flex-col items-center gap-1">
-            <div className="inline-flex items-center gap-1.5 bg-black/60 border border-amber-400/50 backdrop-blur-md rounded-full px-3 py-0.5 text-[10px] sm:text-xs font-bold text-amber-200 shadow-md">
-              <span>🪔</span>
-              <span className="tracking-wider">ஸ்ரீ பெரியாண்டவர் துணை</span>
-              <span>🪔</span>
-            </div>
+
 
             <h1 className="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-custom-1 tracking-wide py-0.5 drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
               காதணி விழா அழைப்பிதழ்
@@ -722,14 +722,14 @@ export default function EarPiercingInvitation() {
             <div className="mt-2 flex flex-col items-center gap-1">
               <button
                 onClick={handleWish}
-                className={`relative group px-6 py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all duration-300 shadow-2xl flex items-center gap-2 ${hasWished
-                  ? "bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-700 text-white shadow-emerald-500/40 hover:brightness-110 ring-2 ring-emerald-300/60"
-                  : "bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-amber-950 shadow-amber-500/60 hover:scale-105 ring-3 ring-yellow-400/40 animate-bounce"
+                className={`relative group px-6 py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all duration-300  flex items-center gap-2 ${hasWished
+                  ? "  text-white  hover:brightness-110 animate-bounce"
+                  : "  text-amber-950  hover:scale-105  animate-bounce"
                   }`}
               >
 
-                <span>
-                  {hasWished ? "நன்றி" : "🙌🏻"}
+                <span >
+                  {hasWished ? "நன்றி" : <span className="text-2xl">🙌🏻</span>}
                 </span>
               </button>
             </div>

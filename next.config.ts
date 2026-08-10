@@ -9,6 +9,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH !== undefined
   : defaultBasePath;
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["192.168.1.4", "192.168.1.*"],
   output: "export",
   basePath: basePath,
   env: {

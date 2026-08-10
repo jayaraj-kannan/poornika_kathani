@@ -12,6 +12,9 @@ const customFont = localFont({
 export const metadata: Metadata = {
   title: "காாதணி விழா அழைப்பிதழ் | ஜ வி பூர்ணிகா",
   description: "திரு க ஜெயராஜ் & திருமதி விஷாலி அவர்களின் அன்பு மகள் ஜ வி பூர்ணிகாவின் காது குத்தும் விழா அழைப்பிதழ்",
+  icons: {
+    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">👼🏻</text></svg>',
+  },
 };
 
 export default function RootLayout({
