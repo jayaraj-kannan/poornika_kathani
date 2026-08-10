@@ -562,7 +562,7 @@ export default function EarPiercingInvitation() {
       </div>
 
       {/* VERTICAL VIEW CONTAINER (Centered 9:16 Mobile Aspect Frame on Desktop) */}
-      <div className="relative z-10 w-full max-w-[440px] h-full sm:h-auto sm:max-h-[96vh] sm:aspect-[9/16] flex flex-col justify-between items-center p-2.5 sm:p-4 overflow-hidden sm:rounded-[2.5rem] sm:border-2 sm:border-amber-400/50 sm:shadow-[0_0_70px_rgba(0,0,0,0.95),0_0_35px_rgba(245,158,11,0.35)] bg-black">
+      <div className="relative z-10 w-full max-w-[440px] h-[100dvh] min-h-[100dvh] sm:min-h-0 sm:h-auto sm:max-h-[96vh] sm:aspect-[9/16] flex flex-col justify-between items-center p-2 sm:p-4 overflow-hidden sm:rounded-[2.5rem] sm:border-2 sm:border-amber-400/50 sm:shadow-[0_0_70px_rgba(0,0,0,0.95),0_0_35px_rgba(245,158,11,0.35)] bg-black">
 
         {/* Main Background Video Inside Vertical Container */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
@@ -604,7 +604,7 @@ export default function EarPiercingInvitation() {
         )}
 
         {/* TOP HEADER CONTROLS (Compact Mobile Bar) */}
-        <header className="w-full max-w-md z-30 flex items-center justify-between pt-1 px-1 shrink-0">
+        <header className="w-full max-w-md z-30 flex items-center justify-between pt-0.5 px-1 shrink-0">
           <div className="flex items-center gap-1">
             <button
               onClick={handleShare}
@@ -641,29 +641,27 @@ export default function EarPiercingInvitation() {
         </header>
 
         {/* SINGLE SCREEN MAIN CONTENT (Scales to 100vh) */}
-        <main className="w-full max-w-md flex-1 z-20 flex flex-col justify-evenly items-center text-center my-auto py-1 px-1 overflow-hidden">
+        <main className="w-full max-w-md flex-1 z-20 flex flex-col justify-evenly items-center text-center my-auto py-0.5 px-1 overflow-hidden">
 
           {/* Divine Invocation & Event Title */}
-          <div className="flex flex-col items-center gap-1">
-
-
-            <h1 className="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-custom-1 tracking-wide py-0.5 drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
+          <div className="flex flex-col items-center gap-0.5">
+            <h1 className="text-xl sm:text-2xl font-extrabold gold-text-gradient font-custom-1 tracking-wide drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
               காதணி விழா அழைப்பிதழ்
             </h1>
           </div>
 
           {/* Parents & Daughter Tag */}
           <div className="space-y-0.5 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
-            <p className="text-amber-100 text-xs sm:text-sm font-bold">
+            <p className="text-amber-100 text-[11px] sm:text-sm font-bold">
               <span>திரு ஜெயராஜ்</span> &amp; <span>திருமதி விஷாலி</span>
             </p>
-            <p className="text-amber-200/90 text-[11px] font-medium">அவர்களின் அன்பு மகள்</p>
+            <p className="text-amber-200/90 text-[10px] sm:text-[11px] font-medium">அவர்களின் அன்பு மகள்</p>
           </div>
 
           {/* Child's Name Badge */}
           <div className="relative group my-0.5">
-            <div className="relative bg-black/75 backdrop-blur-md border border-amber-400/60 px-5 py-1.5 rounded-xl shadow-xl">
-              <h2 className="text-lg sm:text-xl font-black text-amber-100 tracking-wider flex items-center justify-center gap-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+            <div className="relative bg-black/75 backdrop-blur-md border border-amber-400/60 px-4 py-1 rounded-lg shadow-xl">
+              <h2 className="text-base sm:text-lg font-black text-amber-100 tracking-wider flex items-center justify-center gap-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                 <span>✨</span>
                 <span className="gold-text-gradient">ஜெ வி பூர்ணிகா</span>
                 <span>✨</span>
@@ -672,14 +670,14 @@ export default function EarPiercingInvitation() {
           </div>
 
           {/* CENTERPIECE: Arch / Dome Frame (Matches user reference image) */}
-          <div className="relative my-1 flex flex-col items-center shrink-0">
+          <div className="relative my-0.5 flex flex-col items-center shrink-0">
 
             {/* Arch Frame Container: Perfect Arch Dome Top (rounded-t-full) with Crimson Outer Ring */}
-            <div className="relative w-64 h-76 sm:w-52 sm:h-64 rounded-t-full rounded-b-2xl p-1.5 bg-[#800000] border-2 border-amber-400 shadow-[0_0_35px_rgba(245,158,11,0.6)] overflow-hidden flex items-center justify-center transition-transform duration-500 hover:scale-105">
+            <div className="relative w-48 h-56 sm:w-52 sm:h-64 rounded-t-full rounded-b-2xl p-1 bg-[#800000] border-2 border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.5)] overflow-hidden flex items-center justify-center transition-transform duration-500 hover:scale-105">
 
               {/* Inner Gold Rim & Maroon Inner Line */}
               <div className="w-full h-full rounded-t-full rounded-b-xl p-1 bg-gradient-to-b from-amber-300 via-yellow-400 to-amber-600 border border-[#800000] overflow-hidden relative">
-                <div className="w-full h-full rounded-t-full rounded-b-lg overflow-hidden relative bg-amber-950">
+                <div className={`arch w-full h-full rounded-t-full rounded-b-lg overflow-hidden relative bg-amber-950 ${hasWished ? "blessed" : ""}`}>
 
                   {/* Initial Baby Image (p1.png) */}
                   <div
@@ -711,56 +709,106 @@ export default function EarPiercingInvitation() {
                     />
                   </div>
 
+                  {/* Right Earring */}
+                  <div className="earring right" id="earR">
+                    <svg viewBox="0 0 20 34" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <radialGradient id="jimGoldRight" cx="35%" cy="30%" r="75%">
+                          <stop offset="0%" stopColor="#FCEBA8" />
+                          <stop offset="55%" stopColor="#E8BB4E" />
+                          <stop offset="100%" stopColor="#B8860B" />
+                        </radialGradient>
+                      </defs>
+                      <circle cx="10" cy="3" r="2.6" fill="url(#jimGoldRight)" stroke="#8a6200" strokeWidth="0.5" />
+                      <path d="M10 5.5 L10 8.5" stroke="#C99A2E" strokeWidth="1.4" strokeLinecap="round" />
+                      <path
+                        d="M10 8 C6.3 8 4.3 12 4.3 15.3 C4.3 18.1 6.8 19.7 10 19.7 C13.2 19.7 15.7 18.1 15.7 15.3 C15.7 12 13.7 8 10 8 Z"
+                        fill="url(#jimGoldRight)"
+                        stroke="#8a6200"
+                        strokeWidth="0.6"
+                      />
+                      <path d="M6.6 14.2 C7.7 15.3 12.3 15.3 13.4 14.2" fill="none" stroke="#8a6200" strokeWidth="0.5" opacity="0.7" />
+                      <path d="M5.6 11.6 C7.2 9.6 12.8 9.6 14.4 11.6" fill="none" stroke="#fff6d8" strokeWidth="0.5" opacity="0.6" />
+                      <ellipse cx="10" cy="19.7" rx="5.7" ry="1.3" fill="#C99A2E" stroke="#8a6200" strokeWidth="0.4" />
+                      <path d="M10 21 L10 23.2" stroke="#8a6200" strokeWidth="0.8" />
+                      <circle cx="10" cy="25.2" r="2.1" fill="#9C1F3D" stroke="#6b0f22" strokeWidth="0.4" />
+                      <circle cx="9.3" cy="24.5" r="0.6" fill="#e59aab" opacity="0.8" />
+                    </svg>
+                  </div>
+
+                  {/* Left Earring */}
+                  <div className="earring left-half" id="earL">
+                    <svg viewBox="0 0 20 34" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <radialGradient id="jimGoldLeft" cx="35%" cy="30%" r="75%">
+                          <stop offset="0%" stopColor="#FCEBA8" />
+                          <stop offset="55%" stopColor="#E8BB4E" />
+                          <stop offset="100%" stopColor="#B8860B" />
+                        </radialGradient>
+                      </defs>
+                      <circle cx="10" cy="3" r="2.6" fill="url(#jimGoldLeft)" stroke="#8a6200" strokeWidth="0.5" />
+                      <path d="M10 5.5 L10 8.5" stroke="#C99A2E" strokeWidth="1.4" strokeLinecap="round" />
+                      <path
+                        d="M10 8 C6.3 8 4.3 12 4.3 15.3 C4.3 18.1 6.8 19.7 10 19.7 C13.2 19.7 15.7 18.1 15.7 15.3 C15.7 12 13.7 8 10 8 Z"
+                        fill="url(#jimGoldLeft)"
+                        stroke="#8a6200"
+                        strokeWidth="0.6"
+                      />
+                      <path d="M6.6 14.2 C7.7 15.3 12.3 15.3 13.4 14.2" fill="none" stroke="#8a6200" strokeWidth="0.5" opacity="0.7" />
+                      <path d="M5.6 11.6 C7.2 9.6 12.8 9.6 14.4 11.6" fill="none" stroke="#fff6d8" strokeWidth="0.5" opacity="0.6" />
+                      <ellipse cx="10" cy="19.7" rx="5.7" ry="1.3" fill="#C99A2E" stroke="#8a6200" strokeWidth="0.4" />
+                      <path d="M10 21 L10 23.2" stroke="#8a6200" strokeWidth="0.8" />
+                      <circle cx="10" cy="25.2" r="2.1" fill="#9C1F3D" stroke="#6b0f22" strokeWidth="0.4" />
+                      <circle cx="9.3" cy="24.5" r="0.6" fill="#e59aab" opacity="0.8" />
+                    </svg>
+                  </div>
+
                 </div>
               </div>
             </div>
 
-
-
-
             {/* WISH BUTTON */}
-            <div className="mt-2 flex flex-col items-center gap-1">
+            <div className="mt-1 flex flex-col items-center gap-0.5">
               <button
                 onClick={handleWish}
-                className={`relative group px-6 py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all duration-300  flex items-center gap-2 ${hasWished
-                  ? "  text-white  hover:brightness-110 animate-bounce"
-                  : "  text-amber-950  hover:scale-105  animate-bounce"
+                className={`relative group px-5 py-1 rounded-full font-extrabold text-xs sm:text-sm transition-all duration-300 flex items-center gap-1.5 ${hasWished
+                  ? "text-white hover:brightness-110 animate-bounce"
+                  : "text-amber-950 hover:scale-105 animate-bounce"
                   }`}
               >
-
-                <span >
-                  {hasWished ? "நன்றி" : <span className="text-2xl">🙌🏻</span>}
+                <span>
+                  {hasWished ? "🌸 நன்றி 🌸" : <span className="text-xl">🙌🏻</span>}
                 </span>
               </button>
             </div>
           </div>
 
           {/* Short Invitation Wording */}
-          <p className="text-amber-100 text-[11px] sm:text-xs leading-tight max-w-xs font-semibold px-1 drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">
+          <p className="text-amber-100 text-[10px] sm:text-xs leading-tight max-w-xs font-semibold px-1 drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">
             காது குத்தும் விழாவில் கலந்துகொண்டு பூர்ணிகாவை ஆசீர்வதிக்குமாறு அன்புடன் கேட்டு கொள்கிறோம்.
           </p>
 
           {/* EVENT DETAILS GRID (Compact Mobile Cards) */}
-          <div className="w-full grid grid-cols-2 gap-2 mt-1 text-left">
+          <div className="w-full grid grid-cols-2 gap-1.5 mt-0.5 text-left">
 
             {/* Date & Time Pill */}
-            <div className="bg-black/65 border border-amber-400/40 backdrop-blur-md rounded-xl p-2 flex flex-col justify-between shadow-lg">
+            <div className="bg-black/65 border border-amber-400/40 backdrop-blur-md rounded-xl p-1.5 flex flex-col justify-between shadow-lg">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1 text-amber-300 font-bold text-[11px]">
+                <div className="flex items-center gap-1 text-amber-300 font-bold text-[10px]">
                   <Calendar className="w-3 h-3 text-amber-400" />
                   <span>தேதி &amp; நேரம்</span>
                 </div>
               </div>
-              <div className="mt-1">
-                <div className="text-xs sm:text-sm font-black text-amber-100">16 ஆகஸ்ட் 2026</div>
-                <div className="text-[10px] text-amber-300/90 font-medium">காலை 10:30 - 12:00 PM</div>
+              <div className="mt-0.5">
+                <div className="text-[11px] sm:text-xs font-black text-amber-100">16 ஆகஸ்ட் 2026</div>
+                <div className="text-[9px] text-amber-300/90 font-medium">காலை 10:30 - 12:00 PM</div>
               </div>
             </div>
 
             {/* Venue & Location Pill */}
-            <div className="bg-black/65 border border-amber-400/40 backdrop-blur-md rounded-xl p-2 flex flex-col justify-between shadow-lg">
+            <div className="bg-black/65 border border-amber-400/40 backdrop-blur-md rounded-xl p-1.5 flex flex-col justify-between shadow-lg">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1 text-amber-300 font-bold text-[11px]">
+                <div className="flex items-center gap-1 text-amber-300 font-bold text-[10px]">
                   <MapPin className="w-3 h-3 text-amber-400" />
                   <span>இடம் (Venue)</span>
                 </div>
@@ -768,26 +816,26 @@ export default function EarPiercingInvitation() {
                   href={mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[9px] bg-gradient-to-r from-amber-500 to-yellow-500 text-amber-950 font-bold px-1.5 py-0.2 rounded flex items-center gap-0.5 shadow-xs"
+                  className="text-[8.5px] bg-gradient-to-r from-amber-500 to-yellow-500 text-amber-950 font-bold px-1.5 py-0.2 rounded flex items-center gap-0.5 shadow-xs"
                 >
                   <Navigation className="w-2.5 h-2.5" /> Maps
                 </a>
               </div>
-              <div className="mt-1">
-                <div className="text-xs font-bold text-amber-100 leading-tight">
+              <div className="mt-0.5">
+                <div className="text-[10.5px] sm:text-xs font-bold text-amber-100 leading-tight">
                   ஸ்ரீ பெரியாண்டவர் திருக்கோவில்
                 </div>
-                <div className="text-[10px] text-amber-200/90 font-medium mt-0.5">கீழ்குமாரமங்கலம், கடலூர்</div>
+                <div className="text-[9px] text-amber-200/90 font-medium mt-0.2">கீழ்குமாரமங்கலம், கடலூர்</div>
               </div>
             </div>
           </div>
 
           {/* COUNTDOWN TIMER STRIP */}
-          <div className="w-full mt-1 flex items-center justify-center gap-2">
-            <span className="text-[10px] text-amber-300 font-bold drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+          <div className="w-full mt-0.5 flex items-center justify-center gap-1.5">
+            <span className="text-[9.5px] text-amber-300 font-bold drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
               ⏳ விழா ஆரம்பிக்க:
             </span>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1">
               {[
                 { label: "நாட்கள்", val: timeLeft.days },
                 { label: "மணி", val: timeLeft.hours },
@@ -796,10 +844,10 @@ export default function EarPiercingInvitation() {
               ].map((unit, idx) => (
                 <div
                   key={idx}
-                  className="bg-black/70 border border-amber-400/40 rounded-lg px-2 py-0.5 flex items-baseline gap-0.5 shadow-md"
+                  className="bg-black/70 border border-amber-400/40 rounded-lg px-1.5 py-0.2 flex items-baseline gap-0.5 shadow-md"
                 >
-                  <span className="text-xs font-black text-amber-200">{String(unit.val).padStart(2, "0")}</span>
-                  <span className="text-[8px] text-amber-400">{unit.label}</span>
+                  <span className="text-[11px] font-black text-amber-200">{String(unit.val).padStart(2, "0")}</span>
+                  <span className="text-[7.5px] text-amber-400">{unit.label}</span>
                 </div>
               ))}
             </div>
@@ -808,8 +856,8 @@ export default function EarPiercingInvitation() {
         </main>
 
         {/* FOOTER */}
-        <footer className="w-full max-w-md z-20 text-center text-[10px] text-amber-200/80 font-semibold pb-1 shrink-0 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-          ✨ ஜெயராஜ் &amp; விஷாலி குடும்பத்தினரின் காாதணி விழா அழைப்பு ✨
+        <footer className="w-full max-w-md z-20 text-center text-[9px] sm:text-[10px] text-amber-200/80 font-semibold pb-0.5 shrink-0 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+          ✨ ஜெயராஜ் &amp; விஷாலி குடும்பத்தினரின் காதணி விழா அழைப்பு ✨
         </footer>
 
       </div>
