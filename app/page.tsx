@@ -521,7 +521,7 @@ export default function EarPiercingInvitation() {
     "https://maps.app.goo.gl/ZjvbQTxL5djhuXxR9";
 
   return (
-    <div className="relative min-h-screen h-[100dvh] w-full flex items-center justify-center bg-black overflow-hidden text-amber-50 selection:bg-amber-500 selection:text-black font-sans">
+    <div className="relative min-h-screen w-full flex items-center justify-center bg-black text-amber-50 selection:bg-amber-500 selection:text-black font-sans py-2 sm:py-6">
 
       {/* PRELOADER SCREEN */}
       {isLoading && (
@@ -603,7 +603,7 @@ export default function EarPiercingInvitation() {
       </div>
 
       {/* VERTICAL VIEW CONTAINER (Centered 9:16 Mobile Aspect Frame on Desktop) */}
-      <div className="relative z-10 w-full max-w-[440px] h-[100dvh] min-h-[100dvh] sm:min-h-0 sm:h-auto sm:max-h-[96vh] sm:aspect-[9/16] flex flex-col justify-between items-center p-2 sm:p-4 overflow-hidden sm:rounded-[2.5rem] sm:border-2 sm:border-amber-400/50 sm:shadow-[0_0_70px_rgba(0,0,0,0.95),0_0_35px_rgba(245,158,11,0.35)] bg-black">
+      <div className="relative z-10 w-full max-w-[440px] min-h-[100dvh] sm:min-h-0 sm:h-auto sm:max-h-[96vh] sm:aspect-[9/16] flex flex-col justify-between items-center p-2 sm:p-4 overflow-y-auto sm:rounded-[2.5rem] sm:border-2 sm:border-amber-400/50 sm:shadow-[0_0_70px_rgba(0,0,0,0.95),0_0_35px_rgba(245,158,11,0.35)] bg-black">
 
         {/* Main Background Video Inside Vertical Container */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
@@ -682,7 +682,7 @@ export default function EarPiercingInvitation() {
         </header>
 
         {/* SINGLE SCREEN MAIN CONTENT (Scales to 100vh) */}
-        <main className="w-full max-w-md flex-1 z-20 flex flex-col justify-evenly items-center text-center my-auto py-0.5 px-1 overflow-hidden">
+        <main className="w-full max-w-md flex-1 z-20 flex flex-col justify-evenly items-center text-center my-auto py-0.5 px-1 overflow-y-auto">
 
           {/* Divine Invocation & Event Title */}
           <div className="flex flex-col items-center gap-0.5">
@@ -847,28 +847,30 @@ export default function EarPiercingInvitation() {
             </div>
 
             {/* Venue & Location Pill */}
-            <div className="bg-black/65 border border-amber-400/40 backdrop-blur-md rounded-xl p-1.5 flex flex-col justify-between shadow-lg">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1 text-amber-300 font-bold text-[10px]">
-                  <MapPin className="w-3 h-3 text-amber-400" />
-                  <span>இடம் (Venue)</span>
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer">
+              <div className="bg-black/65 border border-amber-400/40 backdrop-blur-md rounded-xl p-1.5 flex flex-col justify-between shadow-lg">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1 text-amber-300 font-bold text-[10px]">
+                    <MapPin className="w-3 h-3 text-amber-400" />
+                    <span>இடம் (Venue)</span>
+                  </div>
+                  <span
+                    className="text-[8.5px] bg-gradient-to-r from-amber-500 to-yellow-500 text-amber-950 font-bold px-1.5 py-0.2 rounded flex items-center gap-0.5 shadow-xs"
+                  >
+                    <Navigation className="w-2.5 h-2.5" /> Maps
+                  </span>
                 </div>
-                <a
-                  href={mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[8.5px] bg-gradient-to-r from-amber-500 to-yellow-500 text-amber-950 font-bold px-1.5 py-0.2 rounded flex items-center gap-0.5 shadow-xs"
-                >
-                  <Navigation className="w-2.5 h-2.5" /> Maps
-                </a>
-              </div>
-              <div className="mt-0.5">
-                <div className="text-[10.5px] sm:text-xs font-bold text-amber-100 leading-tight">
-                  ஸ்ரீ பெரியாண்டவர் திருக்கோவில்
+                <div className="mt-0.5">
+                  <div className="text-[10.5px] sm:text-xs font-bold text-amber-100 leading-tight">
+                    ஸ்ரீ பெரியாண்டவர் திருக்கோவில்
+                  </div>
+                  <div className="text-[9px] text-amber-200/90 font-medium mt-0.2">கீழ்குமாரமங்கலம், கடலூர்</div>
                 </div>
-                <div className="text-[9px] text-amber-200/90 font-medium mt-0.2">கீழ்குமாரமங்கலம், கடலூர்</div>
               </div>
-            </div>
+            </a>
           </div>
 
           {/* COUNTDOWN TIMER STRIP */}
