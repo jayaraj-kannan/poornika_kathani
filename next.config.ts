@@ -4,12 +4,12 @@ const isGithubActions = process.env.GITHUB_ACTIONS === "true";
 const repo = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.replace(/.*?\//, "") : "";
 const defaultBasePath = isGithubActions && repo ? `/${repo}` : "";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH !== undefined 
-  ? process.env.NEXT_PUBLIC_BASE_PATH 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH !== undefined
+  ? process.env.NEXT_PUBLIC_BASE_PATH
   : defaultBasePath;
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["192.168.1.4", "192.168.1.*"],
+  allowedDevOrigins: ["192.168.1.4", "192.168.1.*", "172.20.10.2"],
   output: "export",
   basePath: basePath,
   env: {

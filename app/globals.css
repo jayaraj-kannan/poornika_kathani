@@ -21,11 +21,16 @@
   font-family: var(--font-custom-1), sans-serif !important;
 }
 
+html,
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-custom-1), sans-serif !important;
-  overflow-x: hidden;
+  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
 }
 
 
@@ -164,17 +169,34 @@ body {
 }
 
 .earring.right {
-  top: 63.8px;
-  left: 108px;
+  top: 31.5%;
+  left: 63.5%;
 }
 
 .earring.left-half {
-  top: 85px;
-  left: 53px;
+  top: 42.5%;
+  left: 31%;
   width: 15px;
   height: 18px;
   opacity: 0;
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4)) brightness(0.94);
+}
+
+/* Laptop & Desktop View (sm breakpoint) */
+@media (min-width: 640px) {
+  .earring.right {
+    top: 32.4%;
+    left: 63.8%;
+    width: 17px;
+    height: 20px;
+  }
+
+  .earring.left-half {
+    top: 43.2%;
+    left: 31.2%;
+    width: 17px;
+    height: 20px;
+  }
 }
 
 .blessed .earring.left-half,

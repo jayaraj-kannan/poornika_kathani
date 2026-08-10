@@ -149,6 +149,7 @@ export default function EarPiercingInvitation() {
   const [assetUrls, setAssetUrls] = useState({
     p1: `${basePath}/p1.png`,
     p2: `${basePath}/p2.png`,
+    loading: `${basePath}/loading.png`,
     video: `${basePath}/secene_1.mp4`,
     audio: `${basePath}/Mangala-Vadhyam-Nadaswaram.mp3`
   });
@@ -200,20 +201,22 @@ export default function EarPiercingInvitation() {
     async function loadAssetsStaged() {
       const defaultP1 = `${basePath}/p1.png`;
       const defaultP2 = `${basePath}/p2.png`;
+      const defaultLoading = `${basePath}/loading.png`;
       const defaultVideo = `${basePath}/secene_1.mp4`;
       const defaultAudio = `${basePath}/Mangala-Vadhyam-Nadaswaram.mp3`;
-
+      setIsMusicPlaying(true);
       const isCachedInLocalStorage =
         typeof window !== "undefined" &&
         localStorage.getItem("poornika_assets_cached_v3") === "true";
 
       // 1. Check local storage / IndexedDB cache first
       if (isCachedInLocalStorage) {
-        const [videoBlob, audioBlob, p1Blob, p2Blob] = await Promise.all([
+        const [videoBlob, audioBlob, p1Blob, p2Blob, loadingBlob] = await Promise.all([
           getCachedBlob("secene_1.mp4"),
           getCachedBlob("Mangala-Vadhyam-Nadaswaram.mp3"),
           getCachedBlob("p1.png"),
-          getCachedBlob("p2.png")
+          getCachedBlob("p2.png"),
+          getCachedBlob("loading.png")
         ]);
 
         if (videoBlob && audioBlob && p1Blob && p2Blob && isMounted) {
@@ -221,7 +224,8 @@ export default function EarPiercingInvitation() {
             video: URL.createObjectURL(videoBlob),
             audio: URL.createObjectURL(audioBlob),
             p1: URL.createObjectURL(p1Blob),
-            p2: URL.createObjectURL(p2Blob)
+            p2: URL.createObjectURL(p2Blob),
+            loading: loadingBlob ? URL.createObjectURL(loadingBlob) : defaultLoading
           });
           setLoadingProgress(100);
           setTimeout(() => {
@@ -269,8 +273,8 @@ export default function EarPiercingInvitation() {
           })
         ]);
 
-        // STAGE 2: Download Image Files NEXT (p1.png & p2.png)
-        const [p1Blob, p2Blob] = await Promise.all([
+        // STAGE 2: Download Image Files NEXT (p1.png, p2.png & loading.png)
+        const [p1Blob, p2Blob, loadingBlob] = await Promise.all([
           fetchWithProgress(defaultP1, (rec, tot) => {
             p1Bytes = rec;
             if (isMounted) setLoadingProgress(calcProgress());
@@ -284,7 +288,11 @@ export default function EarPiercingInvitation() {
           }).then(async (blob) => {
             await setCachedBlob("p2.png", blob);
             return blob;
-          })
+          }),
+          fetchWithProgress(defaultLoading, () => { }).then(async (blob) => {
+            await setCachedBlob("loading.png", blob);
+            return blob;
+          }).catch(() => null)
         ]);
 
         // STAGE 3: All assets loaded -> Store flag & reveal app seamlessly
@@ -299,7 +307,8 @@ export default function EarPiercingInvitation() {
             video: URL.createObjectURL(videoBlob),
             audio: URL.createObjectURL(audioBlob),
             p1: URL.createObjectURL(p1Blob),
-            p2: URL.createObjectURL(p2Blob)
+            p2: URL.createObjectURL(p2Blob),
+            loading: loadingBlob ? URL.createObjectURL(loadingBlob) : defaultLoading
           });
           setLoadingProgress(100);
           setTimeout(() => {
@@ -326,6 +335,8 @@ export default function EarPiercingInvitation() {
     };
   }, [basePath]);
 
+  const isUserMutedRef = useRef(false);
+
   // Background Nadaswaram Music & Mobile Video Autoplay Effect
   useEffect(() => {
     if (audioRef.current) {
@@ -342,8 +353,11 @@ export default function EarPiercingInvitation() {
         vid.play().catch(() => { });
       });
 
-      if (audioRef.current && audioRef.current.paused) {
+      if (!isUserMutedRef.current && audioRef.current && audioRef.current.paused) {
         audioRef.current.volume = 0.2; // Lite volume
+        if (audioRef.current.currentTime < 4) {
+          audioRef.current.currentTime = 4;
+        }
         audioRef.current.play().then(() => {
           setIsMusicPlaying(true);
         }).catch((err) => {
@@ -352,7 +366,10 @@ export default function EarPiercingInvitation() {
       }
     };
 
-    playVideosAndAudio();
+    // Attempt auto-play when loading completes or when audio src updates
+    if (!isLoading) {
+      playVideosAndAudio();
+    }
 
     // Auto-resume video & audio on first user touch/click/scroll anywhere on page (essential for iOS/Android battery saver)
     const handleUserInteraction = () => {
@@ -370,18 +387,24 @@ export default function EarPiercingInvitation() {
       window.removeEventListener("click", handleUserInteraction);
       window.removeEventListener("scroll", handleUserInteraction);
     };
-  }, []);
+  }, [isLoading, assetUrls.audio]);
 
-  const toggleMusic = () => {
+  const toggleMusic = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     if (audioRef.current) {
-      if (isMusicPlaying) {
+      if (!audioRef.current.paused || isMusicPlaying) {
+        isUserMutedRef.current = true;
         audioRef.current.pause();
         setIsMusicPlaying(false);
       } else {
+        isUserMutedRef.current = false;
         audioRef.current.volume = 0.2; // Lite volume
+        if (audioRef.current.currentTime < 4) {
+          audioRef.current.currentTime = 4;
+        }
         audioRef.current.play().then(() => {
           setIsMusicPlaying(true);
-        });
+        }).catch(() => { });
       }
     }
   };
@@ -480,8 +503,8 @@ export default function EarPiercingInvitation() {
     if (navigator.share) {
       navigator
         .share({
-          title: "காாதணி விழா அழைப்பிதழ் | ஜ வி பூர்ணிகா",
-          text: "திரு க ஜெயராஜ் & திருமதி விஷாலி அவர்களின் அன்பு மகள் ஜ வி பூர்ணிகாவின் காது குத்தும் விழா அழைப்பிதழ்",
+          title: "காாதணி விழா அழைப்பிதழ் | ஜெ.வி பூர்ணிகா",
+          text: "திரு ஜெயராஜ் & திருமதி விஷாலி அவர்களின் அன்பு மகள் ஜெ.வி பூர்ணிகாவின் காது குத்தும் விழா அழைப்பிதழ்",
           url: window.location.href
         })
         .catch(() => { });
@@ -506,21 +529,23 @@ export default function EarPiercingInvitation() {
           className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0d0703] text-amber-100 transition-opacity duration-700 ${isFadingOut ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
         >
+
           <div className="flex flex-col items-center gap-4 p-6 max-w-sm text-center">
-            {/* Diya Glow Icon */}
-            <div className="relative flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-b from-amber-500/20 to-yellow-600/10 border border-amber-400/40 shadow-[0_0_40px_rgba(245,158,11,0.4)] animate-pulse">
-              <span className="text-4xl">🪔</span>
+            {/* Baby Image Glow Icon */}
+            <div className="relative flex items-center justify-center w-20 h-20 rounded-full p-1 bg-gradient-to-b from-amber-400 via-yellow-500 to-amber-600 border border-amber-300 shadow-[0_0_30px_rgba(245,158,11,0.5)] animate-pulse overflow-hidden">
+              <Image
+                src={assetUrls.loading}
+                alt="Baby Poornika"
+                width={80}
+                height={80}
+                className="w-full h-full object-cover rounded-full"
+                priority
+              />
             </div>
 
             <div className="space-y-1">
-              <div className="text-xs font-bold text-amber-300 tracking-widest uppercase">
-                ஸ்ரீ பெரியாண்டவர் துணை
-              </div>
-              <h2 className="text-lg font-black gold-text-gradient">
-                ஜ வி பூர்ணிகா காதணி விழா
-              </h2>
               <p className="text-[11px] text-amber-200/70 font-medium">
-                அழைப்பிதழ் தயார் செய்யப்படுகிறது...
+                Loading...
               </p>
             </div>
 
@@ -545,6 +570,22 @@ export default function EarPiercingInvitation() {
         autoPlay
         loop
         playsInline
+        onCanPlay={() => {
+          if (!isLoading && audioRef.current && audioRef.current.paused && !isUserMutedRef.current) {
+            audioRef.current.volume = 0.2;
+            if (audioRef.current.currentTime < 4) {
+              audioRef.current.currentTime = 4;
+            }
+            audioRef.current.play().then(() => {
+              setIsMusicPlaying(true);
+            }).catch(() => { });
+          }
+        }}
+        onLoadedMetadata={(e) => {
+          if (e.currentTarget.currentTime < 4) {
+            e.currentTarget.currentTime = 4;
+          }
+        }}
       />
 
       {/* Ambient Blurred Background Video for Large Screen Desktop View */}
@@ -646,7 +687,7 @@ export default function EarPiercingInvitation() {
           {/* Divine Invocation & Event Title */}
           <div className="flex flex-col items-center gap-0.5">
             <h1 className="text-xl sm:text-2xl font-extrabold gold-text-gradient font-custom-1 tracking-wide drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
-              காதணி விழா அழைப்பிதழ்
+              ❃ காதணி விழா அழைப்பிதழ் ❃
             </h1>
           </div>
 
