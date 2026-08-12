@@ -503,7 +503,7 @@ export default function EarPiercingInvitation() {
     if (navigator.share) {
       navigator
         .share({
-          title: "காாதணி விழா அழைப்பிதழ் | ஜெ.வி பூர்ணிகா",
+          title: "காதணி விழா அழைப்பிதழ் | ஜெ.வி பூர்ணிகா",
           text: "திரு ஜெயராஜ் & திருமதி விஷாலி அவர்களின் அன்பு மகள் ஜெ.வி பூர்ணிகாவின் காது குத்தும் விழா அழைப்பிதழ்",
           url: window.location.href
         })
@@ -826,7 +826,7 @@ export default function EarPiercingInvitation() {
 
           {/* Short Invitation Wording */}
           <p className="text-amber-100 text-[10px] sm:text-xs leading-tight max-w-xs font-semibold px-1 drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">
-            காது குத்தும் விழாவில் கலந்துகொண்டு பூர்ணிகாவை ஆசீர்வதிக்குமாறு அன்புடன் கேட்டு கொள்கிறோம்.
+             காதணி விழாவில் கலந்துகொண்டு பூர்ணிகாவை ஆசீர்வதிக்குமாறு அன்புடன் கேட்டு கொள்கிறோம்.
           </p>
 
           {/* EVENT DETAILS GRID (Compact Mobile Cards) */}
