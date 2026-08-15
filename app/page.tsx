@@ -962,6 +962,10 @@ export default function EarPiercingInvitation() {
                 href={mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(mapsUrl, "_blank", "noopener,noreferrer");
+                }}
                 className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-amber-950 font-bold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1 shadow-md transition-transform hover:scale-105 active:scale-95 cursor-pointer"
               >
                 <Navigation className="w-3.5 h-3.5" />
