@@ -518,7 +518,7 @@ export default function EarPiercingInvitation() {
 
 
   const mapsUrl =
-    "https://www.google.com/maps/search/?api=1&query=Shree+Periya+Nayagi+,+Periyandar+Kovil&query_place_id=ChIJKSmeiymgVDoFrDCO0AGtNps";
+    "https://maps.app.goo.gl/vJHe51wSYLsnUodWA?g_st=ic";
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center bg-black text-amber-50 selection:bg-amber-500 selection:text-black font-sans py-2 sm:py-6">
