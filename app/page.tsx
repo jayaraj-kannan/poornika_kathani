@@ -654,6 +654,15 @@ export default function EarPiercingInvitation() {
             >
               {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
             </button>
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-black/65 hover:bg-black/80 border border-amber-400/40 backdrop-blur-md rounded-full p-1.5 text-amber-200 transition shadow-md flex items-center justify-center"
+              title="Open Google Maps Location"
+            >
+              <Navigation className="w-3.5 h-3.5 text-amber-400" />
+            </a>
           </div>
           <div className="inline-flex items-center gap-1.5 bg-black/60 border border-amber-400/50 backdrop-blur-md rounded-full px-3 py-0.5 text-[10px] sm:text-xs font-bold text-amber-200 shadow-md">
             <span>🪔</span>
@@ -826,7 +835,7 @@ export default function EarPiercingInvitation() {
 
           {/* Short Invitation Wording */}
           <p className="text-amber-100 text-[10px] sm:text-xs leading-tight max-w-xs font-semibold px-1 drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">
-             காதணி விழாவில் கலந்துகொண்டு பூர்ணிகாவை ஆசீர்வதிக்குமாறு அன்புடன் கேட்டு கொள்கிறோம்.
+            காதணி விழாவில் கலந்துகொண்டு பூர்ணிகாவை ஆசீர்வதிக்குமாறு அன்புடன் கேட்டு கொள்கிறோம்.
           </p>
 
           {/* EVENT DETAILS GRID (Compact Mobile Cards) */}
@@ -850,15 +859,18 @@ export default function EarPiercingInvitation() {
             <a
               href={mapsUrl}
               target="_blank"
-              rel="noopener noreferrer">
-              <div className="bg-black/65 border border-amber-400/40 backdrop-blur-md rounded-xl p-1.5 flex flex-col justify-between shadow-lg">
+              rel="noopener noreferrer"
+              className="block w-full h-full text-left no-underline transition-transform hover:scale-[1.02] active:scale-[0.98] cursor-pointer rounded-xl group focus:outline-none focus:ring-2 focus:ring-amber-400/50"
+              title="Google Maps-ல் வழிகாட்ட (Open venue in Google Maps)"
+            >
+              <div className="bg-black/65 border border-amber-400/40 group-hover:border-amber-400/70 backdrop-blur-md rounded-xl p-1.5 flex flex-col justify-between shadow-lg h-full">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1 text-amber-300 font-bold text-[10px]">
                     <MapPin className="w-3 h-3 text-amber-400" />
                     <span>இடம் (Venue)</span>
                   </div>
                   <span
-                    className="text-[8.5px] bg-gradient-to-r from-amber-500 to-yellow-500 text-amber-950 font-bold px-1.5 py-0.2 rounded flex items-center gap-0.5 shadow-xs"
+                    className="text-[8.5px] bg-gradient-to-r from-amber-500 to-yellow-500 text-amber-950 font-bold px-1.5 py-0.2 rounded flex items-center gap-0.5 shadow-xs group-hover:brightness-110"
                   >
                     <Navigation className="w-2.5 h-2.5" /> Maps
                   </span>
