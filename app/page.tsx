@@ -164,6 +164,7 @@ export default function EarPiercingInvitation() {
   const [wishCount, setWishCount] = useState(108);
   const [isAudioMuted, setIsAudioMuted] = useState(true);
   const [showBlessingModal, setShowBlessingModal] = useState(false);
+  const [showMapModal, setShowMapModal] = useState(false);
   const [guestName, setGuestName] = useState("");
   const [guestMessage, setGuestMessage] = useState("");
   const [blessingsList, setBlessingsList] = useState<Blessing[]>([
@@ -518,7 +519,7 @@ export default function EarPiercingInvitation() {
 
 
   const mapsUrl =
-    "https://www.google.com/maps?q=11.8452223,79.7383658";
+    "https://maps.app.goo.gl/agdyuiiiwhMGK2UW7";
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center bg-black text-amber-50 selection:bg-amber-500 selection:text-black font-sans py-2 sm:py-6">
@@ -654,15 +655,13 @@ export default function EarPiercingInvitation() {
             >
               {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
             </button>
-            <a
-              href={mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-black/65 hover:bg-black/80 border border-amber-400/40 backdrop-blur-md rounded-full p-1.5 text-amber-200 transition shadow-md flex items-center justify-center"
-              title="Open Google Maps Location"
+            <button
+              onClick={() => setShowMapModal(true)}
+              className="bg-black/65 hover:bg-black/80 border border-amber-400/40 backdrop-blur-md rounded-full p-1.5 text-amber-200 transition shadow-md flex items-center justify-center cursor-pointer"
+              title="Open Google Maps Location Modal"
             >
               <Navigation className="w-3.5 h-3.5 text-amber-400" />
-            </a>
+            </button>
           </div>
           <div className="inline-flex items-center gap-1.5 bg-black/60 border border-amber-400/50 backdrop-blur-md rounded-full px-3 py-0.5 text-[10px] sm:text-xs font-bold text-amber-200 shadow-md">
             <span>🪔</span>
@@ -856,12 +855,10 @@ export default function EarPiercingInvitation() {
             </div>
 
             {/* Venue & Location Pill */}
-            <a
-              href={mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <div
+              onClick={() => setShowMapModal(true)}
               className="block w-full h-full text-left no-underline transition-transform hover:scale-[1.02] active:scale-[0.98] cursor-pointer rounded-xl group focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-              title="Google Maps-ல் வழிகாட்ட (Open venue in Google Maps)"
+              title="Google Maps வழிகாட்ட (Open venue in Google Maps)"
             >
               <div className="bg-black/65 border border-amber-400/40 group-hover:border-amber-400/70 backdrop-blur-md rounded-xl p-1.5 flex flex-col justify-between shadow-lg h-full">
                 <div className="flex items-center justify-between">
@@ -882,7 +879,7 @@ export default function EarPiercingInvitation() {
                   <div className="text-[9px] text-amber-200/90 font-medium mt-0.2">கீழ்குமாரமங்கலம், கடலூர்</div>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
 
           {/* COUNTDOWN TIMER STRIP */}
@@ -916,6 +913,64 @@ export default function EarPiercingInvitation() {
         </footer>
 
       </div>
+
+      {/* GOOGLE MAPS EMBEDDED MODAL */}
+      {showMapModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fadeIn"
+          onClick={() => setShowMapModal(false)}
+        >
+          <div
+            className="relative w-full max-w-md bg-[#120904] border-2 border-amber-400/60 rounded-2xl p-3 sm:p-4 shadow-[0_0_50px_rgba(245,158,11,0.4)] text-amber-50 space-y-3"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-amber-500/30 pb-2">
+              <div className="flex items-center gap-1.5 text-amber-300 font-bold text-xs sm:text-sm">
+                <MapPin className="w-4 h-4 text-amber-400 animate-bounce" />
+                <span>ஸ்ரீ பெரியாண்டவர் திருக்கோவில்</span>
+              </div>
+              <button
+                onClick={() => setShowMapModal(false)}
+                className="p-1.5 rounded-full bg-amber-950/80 border border-amber-400/50 text-amber-300 hover:bg-amber-800 transition cursor-pointer"
+                title="Close"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Google Maps iframe */}
+            <div className="relative w-full h-64 sm:h-72 rounded-xl overflow-hidden border border-amber-400/40 shadow-inner">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3904.8578508512906!2d79.7383658!3d11.845222299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a54a0298b9e2929%3A0x9b36ad01d08e3dac!2sShree%20Periya%20Nayagi%20%2C%20Periyandar%20Kovil!5e0!3m2!1sen!2sin!4v1786772760529!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                className="w-full h-full rounded-xl"
+              />
+            </div>
+
+            {/* Footer with External Link */}
+            <div className="flex items-center justify-between gap-2 pt-1">
+              <div className="text-[10px] sm:text-xs text-amber-200/90 font-medium">
+                📍 கீழ்குமாரமங்கலம், கடலூர்
+              </div>
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-amber-950 font-bold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1 shadow-md transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <Navigation className="w-3.5 h-3.5" />
+                <span>Maps-ல் திறக்க</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
